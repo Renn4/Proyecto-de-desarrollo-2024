@@ -1,3 +1,8 @@
+
+QUE FALTA HACER: 
+- Endpoints de `usuarios.py
+- BODY (json) de `POST /roles/`
+
 # Documentación de endpoints del proyecto aeronaves SIGA
 
 # aeronaves.py
@@ -187,5 +192,76 @@
 
 
 # roles.py
+
+## GET /roles/{email}
+
+- **Descripción**: Devuelve una lista de todos los roles de un usuario.
+- **Método:** GET
+- **Autenticación:** Se requiere token de acceso.
+- **Respuesta:**
+  - **200 OK:**
+	  - **Caso de éxito**: Si se encuentra un usuario con el email especificado, devuelve los datos y `success: True`.
+	  - **Error:** Si no se encuentra un usuario con ese email, devuelve el mensaje `No se encontro un usuario con este email` y `success: False`.
+  - **401 Unauthorized:** si el token no es válido.
+  - **500 Internal Server Error**: Si ocurre un error durante la ejecución. 
+
+## DELETE /roles/
+
+- **Descripción**: Le quita un rol a un usuario, basándose en su mail.
+- **Método:** DELETE
+- **Autenticación:** Se requiere token de acceso.
+- **Respuesta:**
+  - **200 OK:** 
+	  - **Caso de éxito**: Si se pudo quitar el rol, devuelve el mensaje `Se elimino el rol correctamente` y `success: True`.
+	  - **Error 1**: Si el rol no está permitido, devuelve el mensaje `Ese rol no esta permitido`y ``success: False`.
+	  - **Error 2**: Si el rol que se quiere quitar no lo posee el usuario en cuestión, devuelve el mensaje `El rol que quiere eliminar no lo posee, asi que no se realiza acciones` y ``success: False`.
+	  - **Error 3**: Si el mail especificado no pertenece a un usuario, devuelve el mensaje `El mail no es válido y no esta asociado a una cuenta`y ``success: False`.
+  - **401 Unauthorized:** si el token no es válido.
+  - **500 Internal Server Error**: Si ocurre un error durante la ejecución.
+## POST /roles/
+
+- **Descripción**: Le añade un rol a un usuario especificado por mail.
+- **Método:** POST
+- **Autenticación:** Se requiere token de acceso.
+- **Respuesta:**
+  - **200 OK:** 
+	  - **Caso de éxito**: Si se pudo asginar el rol, se devuelve el mensaje `El rol se le asigno correctamente` y `success: True`.
+	  - **Rol ya asignado**: Si el usuario ya tiene ese rol, devuelve el mensaje `Ya posee ese rol`y `success: True`.
+	  - **Error 1**: Si el rol que se quiere quitar no está permitido, devuelve el mensaje `Ese rol no esta permitido` y `success: False`.
+	  - **Error 2**: Si el mail especificado no pertenece a un usuario, devuelve el mensaje `El mail no es válido y no esta asociado a una cuenta`y ``success: False`.
+  - **401 Unauthorized:** si el token no es válido.
+  - **500 Internal Server Error**: Si ocurre un error durante la ejecución.
 # transacciones.py
+
+## GET /transacciones/
+- **Descripción**: Devuelve una lista de todas las transacciones.
+- **Método:** GET
+- **Autenticación:** Se requiere token de acceso.
+- **Respuesta:**
+  - **200 OK:** 
+	  - **Caso de éxito**: Si se encuentran transacciones, devuelve los datos y `success: True`.
+	  - **Error**: Si no se encuentran transacciones, devuelve el mensaje `ERROR`y ``success: False`.
+  - **401 Unauthorized:** si el token no es válido.
+  - **500 Internal Server Error**: Si ocurre un error durante la ejecución.
+
+## POST /transacciones/
+- **Descripción**: Crea una transacción y la efectúa en la cuenta corriente de un usuario.
+- **Método:** POST
+- **Autenticación:**
+- **Respuesta:**
+  - **200 OK:** 
+	  - **Caso de éxito:** Si se encuentra la cuenta corriente del usuario y se puede efectuar la transacción, devuelve el mensaje `Transaccion created successfully` y `success: True`.
+	  - **Error 1:** Si no se encuentra una cuenta corriente del usuario, devuelve el mensaje `El usuario no posee una cuenta` y `success: False`.
+	  - **Error 2**: Si no se puede efectuar la transacción, devuelve el mensaje ``Some data is invalid` y `success: False`.
+## GET /transacciones/usuario/{usuario}
+- **Descripción**: Devuelve las transacciones asociadas a la cuenta corriente de un usuario específico.
+- **Método:** GET
+- **Autenticación:** Se requiere token de acceso.
+- **Respuesta:**
+  - **200 OK:** 
+	  - **Caso de éxito**: Si se encuentran transacciones, devuelve los datos y `success: True`.
+	  - Error 1: Si no se encuentra una cuenta corriente del usuario, devuelve el mensaje `No se encontró la cuenta corriente para este usuario``y ``success: False`.
+	  - **Error** 2: Si no se encuentran transacciones, devuelve el mensaje `No se encontraron transacciones para este usuario` y `success: False`.
+  - **401 Unauthorized:** si el token no es válido.
+  - **500 Internal Server Error**: Si ocurre un error durante la ejecución.
 # usuarios.py
