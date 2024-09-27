@@ -1,6 +1,6 @@
 
 QUE FALTA HACER: 
-- Endpoints de `usuarios.py
+- BODY (json) de `POST /usuarios/` y ` PATCH /usuarios/{email}`
 - BODY (json) de `POST /roles/`
 
 # Documentación de endpoints del proyecto aeronaves SIGA
@@ -265,3 +265,92 @@ QUE FALTA HACER:
   - **401 Unauthorized:** si el token no es válido.
   - **500 Internal Server Error**: Si ocurre un error durante la ejecución.
 # usuarios.py
+
+## GET /usuarios/
+
+- **Descripción**: Devuelve una lista de todos los usuarios
+- **Método:** GET
+- **Autenticación:** Se requiere token de acceso.
+- **Respuesta:**
+  - **200 OK:** 
+	  - **Caso de éxito**: Si se encuentran usuarios, devuelve los datos y `success: True`.
+	  - **Error**: Si no se encuentran usuarios, devuelve el mensaje `No se encuentran usuarios` y `success:false` 
+  - **401 Unauthorized:** si el token no es válido.
+  - **500 Internal Server Error**: Si ocurre un error durante la ejecución.
+## GET /usuarios/{email}
+
+- **Descripción**: Obtiene un usuario mediante su mail.
+- **Método:** GET
+- **Autenticación:** Se requiere token de acceso.
+- **Respuesta:**
+  - **200 OK:** 
+	  - **Caso de éxito**: Si se encuentra al usuario, devuelve los datos y `success: True`.
+	  - **Error**: Si no se encuentra un usuario con ese mail, devuelve el mensaje `El usuario con ese mail no existe` y `success:false` 
+  - **401 Unauthorized:** si el token no es válido.
+  - **500 Internal Server Error**: Si ocurre un error durante la ejecución.
+## GET /usuarios/instructores
+
+- **Descripción**: Devuelve una lista de todos los usuarios con el rol de instructor.
+- **Método:**  GET
+- **Autenticación:** Se requiere token de acceso.
+- **Respuesta:**
+  - **200 OK:** 
+	  - **Caso de éxito**: Si se encuentran instructores, devuelve los datos y `success: True`.
+	  - **Error**: Si no se encuentran instructores, devuelve el mensaje `No se encontraron usuarios` y `success:false` 
+  - **401 Unauthorized:** si el token no es válido.
+  - **500 Internal Server Error**: Si ocurre un error durante la ejecución.
+## GET /usuarios/asociados
+
+- **Descripción**: Devuelve una lista de todos los usuarios con el rol de asociado.
+- **Método:** GET
+- **Autenticación:** Se requiere token de acceso.
+- **Respuesta:**
+  - **200 OK:** 
+	  - **Caso de éxito**: Si se encuentran asociados, devuelve los datos y `success: True`.
+	  - **Error**: Si no se encuentran asociados, devuelve el mensaje `No se encontraron usuarios` y `success:false` 
+  - **401 Unauthorized:** si el token no es válido.
+  - **500 Internal Server Error**: Si ocurre un error durante la ejecución.
+## POST /usuarios/
+
+- **Descripción**: Crea un nuevo usuario.
+- **Método:** POST
+- **Autenticación:** Se requiere token de acceso.
+- **Respuesta:**
+  - **200 OK:** 
+	  - **Caso de éxito**: Si el usuario se pudo crear correctamente, devuelve `success: True`.
+	  - **Error**: Si no se pudo crear el usuario, devuelve el mensaje `Algunos datos ingresados estan mal` y `success:false` 
+  - **401 Unauthorized:** si el token no es válido.
+  - **500 Internal Server Error**: Si ocurre un error durante la ejecución.
+## PATCH /usuarios/{email}
+
+- **Descripción**: Actualiza la información del usuario que corresponda al mail especificado.
+- **Método:** PATCH
+- **Autenticación:** Se requiere token de acceso.
+- **Respuesta:**
+  - **200 OK:** 
+	  - **Caso de éxito**: Si se pudo actualizar al usuario, devuelve el mensaje `Usuario actualizado correctamente` y `success: True`.
+	  - **Error**: Si no se encontró al usuario, devuelve el mensaje `Usuario no encontrado` y `success:false` 
+  - **401 Unauthorized:** si el token no es válido.
+  - **500 Internal Server Error**: Si ocurre un error durante la ejecución.
+## DELETE /usuarios/{email}
+
+- **Descripción**: Borra al usuario que corresponda al mail especificado.
+- **Método:** DELETE
+- **Autenticación:** Se requiere token de acceso.
+- **Respuesta:**
+  - **200 OK:** 
+	  - **Caso de éxito**: Si se pudo eliminar al usuario, devuelve `success: True`.
+	  - **Error**: Si no se encontró al usuario, devuelve el mensaje `Usuario no encontrado` y `success:false` 
+  - **401 Unauthorized:** si el token no es válido.
+  - **500 Internal Server Error**: Si ocurre un error durante la ejecución.
+## GET /usuarios/nombre/{nombre}
+
+- **Descripción**: Obtiene un usuario mediante su nombre.
+- **Método:** GET
+- **Autenticación:** Se requiere token de acceso.
+- **Respuesta:**
+  - **200 OK:** 
+	  - **Caso de éxito**: Si se encuentra al usuario, devuelve los datos y `success: True`.
+	  - **Error**: Si no se lo encontró, devuelve `No existe usuario con esa combinación` y `success: False`
+  - **401 Unauthorized:** si el token no es válido.
+  - **500 Internal Server Error**: Si ocurre un error durante la ejecución.
