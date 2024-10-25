@@ -1,0 +1,2 @@
+Modificar el atributo SQLALCHEMY_DATABASE_URI en el .env del backend para que conecte a la base de datos que estés ejecutando en tu PC.
+Ponele la contraseña y usuario que tengas configurado.
